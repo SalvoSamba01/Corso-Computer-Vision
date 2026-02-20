@@ -194,6 +194,93 @@ def sovrapponi_heatmap(frame: np.ndarray, heatmap: np.ndarray,
     return cv2.addWeighted(frame, 1 - alpha, hm_color, alpha, 0)
 
 
+# ─── Detection & Tracking — annotazione ─────────────────────────────────────
+
+_COLORI_CLASSE = {
+    0: (0, 255, 0),    # person     → verde
+    1: (255, 165, 0),  # bicycle    → arancione
+    2: (0, 0, 255),    # car        → rosso
+    3: (255, 0, 255),  # motorcycle → magenta
+    5: (0, 165, 255),  # bus        → arancione chiaro
+    7: (0, 80, 255),   # truck      → blu scuro
+}
+
+
+def disegna_detection(frame: np.ndarray, risultati,
+                      soglia_conf: float = 0.3,
+                      classi_filtro: list = None,
+                      nomi_classi: dict = None) -> np.ndarray:
+    """
+    Disegna i bounding box delle detection YOLO su un frame.
+
+    Args:
+        frame: immagine BGR
+        risultati: output di YOLO (lista di Results)
+        soglia_conf: confidenza minima per mostrare una detection
+        classi_filtro: lista di ID classe da visualizzare (None = tutte)
+        nomi_classi: dict {id: nome}, tipicamente model.names (opzionale)
+    """
+    out = frame.copy()
+    nomi = nomi_classi or {}
+    for box in risultati[0].boxes:
+        conf = float(box.conf[0])
+        cls_id = int(box.cls[0])
+        if conf < soglia_conf:
+            continue
+        if classi_filtro is not None and cls_id not in classi_filtro:
+            continue
+        x1, y1, x2, y2 = map(int, box.xyxy[0])
+        colore = _COLORI_CLASSE.get(cls_id, (200, 200, 200))
+        nome = nomi.get(cls_id, str(cls_id))
+        cv2.rectangle(out, (x1, y1), (x2, y2), colore, 2)
+        cv2.putText(out, f'{nome} {conf:.2f}', (x1, y1 - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, colore, 2)
+    return out
+
+
+_PALETTE_TRACKS: np.ndarray = None
+
+
+def _get_palette(n: int = 200) -> np.ndarray:
+    global _PALETTE_TRACKS
+    if _PALETTE_TRACKS is None:
+        rng = np.random.default_rng(42)
+        _PALETTE_TRACKS = rng.integers(0, 255, size=(n, 3), dtype=np.uint8)
+    return _PALETTE_TRACKS
+
+
+def disegna_tracks(frame: np.ndarray, tracks: np.ndarray,
+                   id_target: int = None) -> np.ndarray:
+    """
+    Disegna i bounding box con ID del tracker su un frame.
+
+    tracks shape: (N, 7+) — [x1, y1, x2, y2, track_id, conf, cls, ...]
+
+    Args:
+        frame: immagine BGR
+        tracks: array output del tracker (BoxMOT / ByteTrack)
+        id_target: se specificato, evidenzia solo questo ID; gli altri in grigio
+    """
+    out = frame.copy()
+    if tracks is None or len(tracks) == 0:
+        return out
+    palette = _get_palette()
+    for track in tracks:
+        x1, y1, x2, y2 = map(int, track[:4])
+        tid = int(track[4])
+        if id_target is not None and tid != id_target:
+            cv2.rectangle(out, (x1, y1), (x2, y2), (130, 130, 130), 1)
+        else:
+            c = palette[tid % len(palette)]
+            colore = (int(c[0]), int(c[1]), int(c[2]))
+            spessore = 3 if id_target is not None else 2
+            cv2.rectangle(out, (x1, y1), (x2, y2), colore, spessore)
+            label = f'★ ID:{tid}' if id_target is not None else f'ID:{tid}'
+            cv2.putText(out, label, (x1, y1 - 6),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.55, colore, 2)
+    return out
+
+
 # ─── Metriche ─────────────────────────────────────────────────────────────────
 
 def psnr(img_ref: np.ndarray, img_test: np.ndarray) -> float:
