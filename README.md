@@ -10,11 +10,21 @@ Modulo di laboratorio — 3 giorni, 4 ore al giorno.
 | 2 | Vehicle/People Counting & Trajectory Analysis | `notebooks/day_2_counting_e_traiettorie.ipynb` |
 | 3 | Image/Video Restoration & Caso Studio Targhe | `notebooks/day_3_restoration.ipynb` |
 
+## Apri su Google Colab
+
+Clicca sul link del giorno per aprire direttamente il notebook su Colab:
+
+| Giorno | Link |
+|--------|------|
+| Giorno 1 — Detection & Tracking | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SalvoSamba01/Corso-Computer-Vision/blob/main/notebooks/day_1_detection_e_tracking.ipynb) |
+| Giorno 2 — Counting & Traiettorie | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SalvoSamba01/Corso-Computer-Vision/blob/main/notebooks/day_2_counting_e_traiettorie.ipynb) |
+| Giorno 3 — Restoration & OCR | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SalvoSamba01/Corso-Computer-Vision/blob/main/notebooks/day_3_restoration.ipynb) |
+
+> Il notebook clona automaticamente il repo e installa le dipendenze alla prima esecuzione.
+
 ## Setup (Google Colab)
 
-Ogni notebook contiene una cella di installazione iniziale. Nessun setup manuale richiesto.
-
-Per usare i dati del corso, carica la cartella `data/` sul tuo Google Drive e monta il drive all'inizio del notebook come indicato nelle istruzioni.
+Ogni notebook clona automaticamente il repo e installa le dipendenze alla prima esecuzione. Nessun setup manuale richiesto.
 
 ## Struttura del repo
 
