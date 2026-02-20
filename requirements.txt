@@ -1,0 +1,23 @@
+# ── Giorno 1: Detection & Tracking ─────────────────────────────────────────
+ultralytics>=8.0.0          # YOLOv8 — object detection
+boxmot>=10.0.0              # Multi-object tracking (ByteTrack, StrongSORT, ...)
+opencv-python>=4.8.0        # Video I/O e image processing
+
+# ── Giorno 2: Counting & Trajectory ─────────────────────────────────────────
+supervision>=0.20.0         # Roboflow: annotazioni, zone, counting
+norfair>=2.2.0              # Trajectory tracking & analysis
+
+# ── Giorno 3: Restoration ────────────────────────────────────────────────────
+basicsr>=1.4.2              # Backend per Real-ESRGAN
+facexlib>=0.3.0             # Face detection per Real-ESRGAN
+gfpgan>=1.3.8               # Face restoration (usato da Real-ESRGAN)
+realesrgan>=0.3.0           # Super-resolution, denoising, deblur
+huggingface_hub>=0.20.0     # Download pesi da HuggingFace
+easyocr>=1.7.0              # OCR per lettura targhe (Giorno 3, caso studio)
+
+# ── Utility comuni ────────────────────────────────────────────────────────────
+numpy>=1.24.0
+matplotlib>=3.7.0
+Pillow>=9.5.0
+tqdm>=4.65.0
+pandas>=2.0.0
