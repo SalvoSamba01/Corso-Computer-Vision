@@ -1,11 +1,11 @@
 # ── Giorno 1: Detection & Tracking ─────────────────────────────────────────
 ultralytics>=8.0.0          # YOLOv8 — object detection
-boxmot>=10.0.0              # Multi-object tracking (ByteTrack, StrongSORT, ...)
+boxmot==10.0.11             # Multi-object tracking (ByteTrack, StrongSORT, ...)
 opencv-python>=4.8.0        # Video I/O e image processing
 
 # ── Giorno 2: Counting & Trajectory ─────────────────────────────────────────
-supervision>=0.20.0         # Roboflow: annotazioni, zone, counting
-norfair>=2.2.0              # Trajectory tracking & analysis
+supervision==0.21.0         # Roboflow: annotazioni, zone, counting
+norfair==2.2.0              # Trajectory tracking & analysis
 
 # ── Giorno 3: Restoration ────────────────────────────────────────────────────
 basicsr>=1.4.2              # Backend per Real-ESRGAN
@@ -21,6 +21,7 @@ matplotlib>=3.7.0
 Pillow>=9.5.0
 tqdm>=4.65.0
 pandas>=2.0.0
+
 # ── Dipendenze aggiuntive ─────────────────────────────────────────────────────
 plotly>=5.0.0               # Grafici interattivi (Giorno 2)
 nbformat>=5.9.0             # Necessario per eseguire notebook Jupyter
@@ -29,4 +30,3 @@ onnxruntime>=1.16.0         # Runtime per modelli ONNX (Giorno 2)
 filterpy>=1.4.5             # Filtri di Kalman (norfair dependency)
 rich>=13.0.0                # Output colorato in console
 ipywidgets>=8.0.0           # Widget interattivi (slider, ecc.)
-supervision>=0.21.0         # Annotazioni, zone, counting (sovrascrive la riga precedente)
