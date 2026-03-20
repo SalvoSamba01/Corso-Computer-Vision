@@ -1,6 +1,6 @@
 # ── Giorno 1: Detection & Tracking ─────────────────────────────────────────
 ultralytics>=8.0.0          # YOLOv8 — object detection
-boxmot==10.0.11             # Multi-object tracking (ByteTrack, StrongSORT, ...)
+boxmot==16.0.11             # Multi-object tracking (ByteTrack, StrongSORT, ...)
 opencv-python>=4.8.0        # Video I/O e image processing
 
 # ── Giorno 2: Counting & Trajectory ─────────────────────────────────────────
