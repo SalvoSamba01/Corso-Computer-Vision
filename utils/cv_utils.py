@@ -281,55 +281,6 @@ def disegna_tracks(frame: np.ndarray, tracks: np.ndarray,
     return out
 
 
-# ─── Video playback (Jupyter / Colab) ────────────────────────────────────────
-
-def converti_video_h264(input_path: str, output_path: str) -> str:
-    """
-    Re-encoding del video in H.264 tramite ffmpeg per la riproduzione nel browser.
-    Se ffmpeg non è disponibile o il re-encoding fallisce, restituisce input_path.
-    """
-    import subprocess, os
-    r = subprocess.run(
-        ['ffmpeg', '-y', '-i', input_path, '-vcodec', 'libx264',
-         '-crf', '23', '-movflags', '+faststart', output_path, '-loglevel', 'quiet'],
-        capture_output=True
-    )
-    if r.returncode == 0 and os.path.exists(output_path) and os.path.getsize(output_path) > 0:
-        if input_path != output_path:
-            try:
-                os.remove(input_path)
-            except Exception:
-                pass
-        return output_path
-    return input_path
-
-
-def mostra_video_colab(input_path: str, output_path: str = None, width: int = 700) -> str:
-    """
-    Mostra un video inline nel notebook Jupyter/Colab.
-    Se output_path è fornito, converte prima il video in H.264 tramite ffmpeg.
-
-    Args:
-        input_path:  path del video da mostrare (o file .mp4v temporaneo da convertire)
-        output_path: se fornito, chiama converti_video_h264(input_path, output_path) prima di mostrare
-        width:       larghezza del player in pixel
-
-    Returns:
-        path del file video mostrato
-    """
-    from base64 import b64encode
-    from IPython.display import HTML, display as _disp
-    path = converti_video_h264(input_path, output_path) if output_path else input_path
-    with open(path, 'rb') as f:
-        video_b64 = b64encode(f.read()).decode()
-    _disp(HTML(
-        f'<video width="{width}" controls>'
-        f'<source src="data:video/mp4;base64,{video_b64}" type="video/mp4">'
-        f'</video>'
-    ))
-    return path
-
-
 # ─── Metriche ─────────────────────────────────────────────────────────────────
 
 def psnr(img_ref: np.ndarray, img_test: np.ndarray) -> float:
