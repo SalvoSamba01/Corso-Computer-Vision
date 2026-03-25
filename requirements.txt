@@ -15,6 +15,9 @@ realesrgan>=0.3.0           # Super-resolution, denoising, deblur
 huggingface_hub>=0.20.0     # Download pesi da HuggingFace
 easyocr>=1.7.0              # OCR per lettura targhe (Giorno 3, caso studio)
 
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+jupyter>=1.0.0              # Jupyter Notebook
+
 # ── Utility comuni ────────────────────────────────────────────────────────────
 numpy>=1.24.0
 matplotlib>=3.7.0
