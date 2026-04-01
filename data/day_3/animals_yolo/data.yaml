@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 5
+names: ['cat', 'cow', 'dog', 'hen', 'horse']
+
+roboflow:
+  workspace: uniworkspace-otguk
+  project: animals-pwswg-u0asd
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/uniworkspace-otguk/animals-pwswg-u0asd/dataset/1
