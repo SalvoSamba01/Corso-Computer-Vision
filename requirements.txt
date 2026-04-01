@@ -31,5 +31,4 @@ nbformat>=5.9.0             # Necessario per eseguire notebook Jupyter
 scipy>=1.11.0               # Filtri, signal processing
 onnxruntime>=1.16.0         # Runtime per modelli ONNX (Giorno 2)
 filterpy>=1.4.5             # Filtri di Kalman (norfair dependency)
-rich>=13.0.0                # Output colorato in console
 ipywidgets>=8.0.0           # Widget interattivi (slider, ecc.)
