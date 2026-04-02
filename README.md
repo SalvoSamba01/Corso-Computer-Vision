@@ -1,6 +1,13 @@
 # Corso Pratico di Computer Vision
 
+
 Modulo di laboratorio — 3 giorni, 4 ore al giorno.
+
+# Contatti
+
+Prof. Sebastiato Battiato - sebastiano.battiato@unict.it
+
+Dott. Salvatore Alfio Sambataro - salvatore.sambataro@phd.unict.it
 
 ## Struttura del corso
 
